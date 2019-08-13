@@ -1,0 +1,23 @@
+#服务端口
+server:
+       port: 8080
+
+#日志处理
+logging:
+  level:
+    root: info
+
+
+# dubbo配置
+spring:
+  dubbo:
+    registry:
+      protocol: zookeeper
+      address: 39.106.154.120:2181
+    application: user-web
+    protocol:
+      name: dubbo
+      port: 55000
+    base-package: com.duanxin.gmall
+    consumer:
+      timeout: 600000   #设置超时时间

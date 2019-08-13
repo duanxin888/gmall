@@ -1,0 +1,39 @@
+#服务端口
+server:
+       port: 8080
+
+#数据库
+public-key: MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAJ+ulL2Sx9nmIxNzpHFYFdoSsHsN736DUCKLRL/we0dl+8w0zWY3eOY9SHFIA4GU4b8CbPFdBj0bwfKOYCG0dx0CAwEAAQ==
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      url: jdbc:mysql://localhost:3306/gmall
+      username: root
+      password: EBNRRgAWXDjw3856o7rL/4m+GWrM35N51QxYPxev2hxtE982KdTT8M2u6/EUX1vKvcBIZSkTKkIbs42O2LHB3Q==
+      connection-properties: config.decrypt=true;config.decrypt.key=${public-key}
+      initial-size: 5      #初始化连接个数
+      max-active: 20       #最大连接个数
+      min-idle: 5          #最小连接个数
+      max-wait: 6000       #最大等待时间
+      pool-prepared-statements: true                        #开启缓存PSCache
+      max-pool-prepared-statement-per-connection-size: 20   #指定每个连接上PSCache的大小
+      time-between-eviction-runs-millis: 6000               #在空闲连接回收器线程运行期间休眠的时间值
+      min-evictable-idle-time-millis: 100000                # 配置一个连接在池中最小生存的时间
+      validation-query: SELECT 1 FROM DUAL                  #用来检测连接是否有效的sql
+      validation-query-timeout: 60000                       #检查sql超时时间
+      test-while-idle: true     #申请连接的时候检测
+      test-on-borrow: false     #申请连接时执行validationQuery检测连接是否有效
+      test-on-return: false     #归还连接时执行validationQuery检测连接是否有效
+      filters: stat,wall,config   #启动stat，wall过滤器，config过滤器启动加密操作
+
+# mybatis
+mybatis:
+  mapper-locations: classpath:mapper/*Mapper.xml
+  configuration:
+    map-underscore-to-camel-case: true
+
+#日志处理
+logging:
+  level:
+    root: info
